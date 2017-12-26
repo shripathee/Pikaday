@@ -110,13 +110,14 @@
 
     setToStartOfDay = function(date)
     {
-        if (isDate(date)) date.setHours(0,0,0,0);
+        // if (isDate(date)) date.setHours(0,0,0,0);
     },
 
     compareDates = function(a,b)
     {
-        // weak date comparison (use setToStartOfDay(date) to ensure correct result)
-        return a.getTime() === b.getTime();
+        var startDate = moment(a);
+        var endDate = moment(b);
+        return startDate.date() === endDate.date() && startDate.month() === endDate.month() && startDate.year() === endDate.year();
     },
 
     extend = function(to, from, overwrite)
