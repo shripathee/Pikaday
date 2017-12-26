@@ -115,8 +115,9 @@
 
     compareDates = function(a,b)
     {
-        // weak date comparison (use setToStartOfDay(date) to ensure correct result)
-        return a.getTime() === b.getTime();
+        var firstDate = moment(a);
+        var secondDate = moment(b);
+        return firstDate.date() === secondDate.date() && firstDate.month() === secondDate.month() && firstDate.year() === secondDate.year();
     },
 
     extend = function(to, from, overwrite)
@@ -1007,7 +1008,10 @@
             randId = 'pika-title-' + Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 2);
 
             for (var c = 0; c < opts.numberOfMonths; c++) {
-                html += '<div class="pika-lendar">' + renderTitle(this, c, this.calendars[c].year, this.calendars[c].month, this.calendars[0].year, randId) + this.render(this.calendars[c].year, this.calendars[c].month, randId) + '</div>';
+                html += '<div class="pika-lendar">' + renderTitle(this, c, this.calendars[c].year, this.calendars[c].month, this.calendars[0].year, randId) + this.
+                
+                
+                this.calendars[c].year, this.calendars[c].month, randId) + '</div>';
             }
 
             this.el.innerHTML = html;
@@ -1101,7 +1105,6 @@
                 before = new Date(year, month, 1).getDay(),
                 data   = [],
                 row    = [];
-            setToStartOfDay(now);
             if (opts.firstDay > 0) {
                 before -= opts.firstDay;
                 if (before < 0) {
